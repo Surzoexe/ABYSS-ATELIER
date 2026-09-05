@@ -1,0 +1,6 @@
+{
+  "name": "Underground Atelier Neo-Grunge",
+  "description": "Authentic streetwear and drop-shoulder graphic tees from @abyss.atelier_, featuring heavyweight 240-450 GSM combed cotton, dark cyber-sigilism aesthetics, and direct ordering via Instagram DM.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

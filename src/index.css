@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  --font-syne: "Syne", sans-serif;
+  --font-space: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-surface-base: #050505;
+  --color-surface-card: #09090b;
+  --color-surface-elevated: #18181b;
+  --color-surface-hover: #121214;
+  --color-border-hairline: #18181b;
+  --color-border-subtle: #27272a;
+  --color-border-elevated: #3f3f46;
+  --color-chrome: #e4e4e7;
+  --color-zinc: #71717a;
+  --color-silver: #a1a1aa;
+  --color-crimson: #7f1d1d;
+  --color-crimson-light: #fca5a5;
+}
+
+@layer base {
+  * {
+    border-radius: 0px !important;
+  }
+
+  body {
+    font-family: var(--font-space), sans-serif;
+    background-color: #050505;
+    color: #e4e4e7;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-syne), sans-serif;
+    letter-spacing: -0.03em;
+  }
+
+  code, pre, .font-mono, .label-spec, .label-code {
+    font-family: var(--font-mono), monospace;
+  }
+}
+
+/* Hard Brutalist Aesthetics */
+.shadow-flash {
+  box-shadow: 4px 4px 0px 0px #e4e4e7;
+}
+
+.shadow-flash-subtle {
+  box-shadow: 3px 3px 0px 0px #3f3f46;
+}
+
+.specular-top-edge {
+  position: relative;
+}
+.specular-top-edge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(228, 228, 231, 0.45) 0%, rgba(228, 228, 231, 0.1) 60%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Subtle Film Grain Noise Texture */
+.grunge-noise {
+  background-image: radial-gradient(rgba(228, 228, 231, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Custom Sharp Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #71717a;
+}
