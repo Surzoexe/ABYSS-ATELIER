@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, ShoppingBag, SkipForward, Instagram, ArrowUpRight } from 'lucide-react';
 import {
   playTactileClick,
@@ -23,6 +23,23 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [timestamp, setTimestamp] = useState<string>('');
   const [soundActive, setSoundActive] = useState<boolean>(false);
   const [currentTrack, setCurrentTrack] = useState<MusicTrack>(getCurrentTrack());
+  const [isCountBumped, setIsCountBumped] = useState<boolean>(false);
+  const [bumpKey, setBumpKey] = useState<number>(0);
+  const prevCountRef = useRef<number>(cartCount);
+
+  // Trigger visual feedback scale-up animation whenever an item is added to the requisition list
+  useEffect(() => {
+    if (cartCount > prevCountRef.current) {
+      setIsCountBumped(true);
+      setBumpKey((prev) => prev + 1);
+      const timer = setTimeout(() => {
+        setIsCountBumped(false);
+      }, 450);
+      prevCountRef.current = cartCount;
+      return () => clearTimeout(timer);
+    }
+    prevCountRef.current = cartCount;
+  }, [cartCount]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -158,7 +175,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <ShoppingBag size={14} className="text-[#e4e4e7]" />
             <span className="font-bold text-white tracking-widest">CART</span>
-            <span className="bg-[#18181b] border border-[#3f3f46] text-white px-1.5 py-0.2 text-[10px] font-bold">
+            <span
+              key={bumpKey}
+              id="cart-count-badge"
+              className={`inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold border transition-colors duration-150 origin-center ${
+                isCountBumped
+                  ? 'animate-cart-bump bg-white text-[#09090b] border-white shadow-[0_0_8px_rgba(255,255,255,0.7)]'
+                  : 'bg-[#18181b] text-white border-[#3f3f46]'
+              }`}
+            >
               {cartCount}
             </span>
           </button>
